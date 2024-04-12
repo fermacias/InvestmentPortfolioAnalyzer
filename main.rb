@@ -1,4 +1,5 @@
 require "./utils.rb"
+require 'date'
 
 # Analyzes the gains received for a portfolio.
 #
@@ -22,8 +23,8 @@ end
 
 # Analyzes the available portfolios and determines which one provides the highest return within a specific time period.
 #
-# @param [String] start_date The start date of the period in YYYY/MM/DD format.
-# @param [String] end_date The end date of the period in YYYY/MM/DD format.
+# @param [String] start_date The start date of the period in DD-MM-YYYY format.
+# @param [String] end_date The end date of the period in DD-MM-YYYY format.
 # @param [Integer] investment_amount The amount invested in the investment.
 # @return [void] This function does not return any value, but prints the result.
 def portfolios_analyzer(start_date, end_date, investment_amount)
@@ -45,15 +46,18 @@ def portfolios_analyzer(start_date, end_date, investment_amount)
 end
 
 if __FILE__ == $0
-    puts "Enter the investment start date:"
-    # start_date = gets.chomp # todo: check input data
-    start_date = "2020-01-05" # todo: change to DD-MM-YYYY
-    puts "Enter the investment end date:"
-    # end_date = gets.chomp
-    end_date = "2020-01-20"
-    puts "Enter the investment amount:"
-    # investment_amount = gets.chomp.to_i
+    start_date = nil
+    end_date = nil
+    loop do
+        # start_date = "05-01-2020"
+        start_date = get_valid_date("Enter the investment start date")
+        # end_date = "20-01-2020"
+        end_date = get_valid_date("Enter the investment end date")
+        break if Date.parse(start_date) < Date.parse(end_date)
+        puts "The end date must be after the start date."
+    end
     investment_amount = 20000
+    # investment_amount = get_valid_integer("Enter the investment amount")
 
     portfolios_analyzer(start_date, end_date, investment_amount)
   end

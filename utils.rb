@@ -1,6 +1,7 @@
 require "uri"
 require "net/http"
 require "json"
+require 'date'
 
 # Reads JSON data from a file and parses it into a Ruby object.
 #
@@ -10,6 +11,55 @@ def readJson(file_name)
     json_data = File.read(file_name)
     return JSON.parse(json_data)
 end
+
+# Checks if a string is a valid date in DD-MM-YYYY format.
+#
+# @param [String] date_str The string to check.
+# @return [Boolean] true if the string is a valid date in DD-MM-YYYY format, false otherwise.
+def is_a_valid_date(date_str)
+    Date.strptime(date_str, '%d-%m-%Y')
+    true
+  rescue ArgumentError
+    false
+  end
+
+# Requests the user to enter a date in DD-MM-YYYY format.
+#
+# @param [String] prompt The prompt message for the user.
+# @return [String] The date entered by the user.
+def get_valid_date(prompt)
+    loop do
+      puts "#{prompt}: "
+      date_str = gets.chomp
+      return date_str if is_a_valid_date(date_str)
+      puts "Error: #{date_str} is not a valid date in DD-MM-YYYY format. Please try again."
+    end
+end
+
+# Converts a date from DD-MM-YYYY format to YYYY-MM-DD format.
+#
+# @param [String] date_str The date in DD-MM-YYYY format.
+# @return [String] The date converted to YYYY-MM-DD format.
+def convert_date_format(date_str)
+    date_obj = Date.strptime(date_str, '%d-%m-%Y')
+    date_obj.strftime('%Y-%m-%d')
+end
+
+# Requests the user to enter a valid integer.
+#
+# @param [String] prompt The prompt message for the user.
+# @return [Integer] The integer entered by the user.
+def get_valid_integer(prompt)
+    loop do
+      print "#{prompt}: "
+      input = gets.chomp
+      if input =~ /^\d+$/  # Checks if the input is a positive integer
+        return input.to_i
+      else
+        puts "Error: Please enter a valid integer."
+      end
+    end
+  end
 
 # Extracts the quota price at a specific date from the information extracted from the Fintual API for a given time period.
 #
@@ -61,16 +111,17 @@ end
 
 # Calculates the quota value for each available fund on a start date and an end date.
 #
-# @param [String] start_date The start date in YYYY/MM/DD format.
-# @param [String] end_date The end date in YYYY/MM/DD format.
+# @param [String] start_date The start date in DD-MM-YYYY format.
+# @param [String] end_date The end date in ç format.
 # @return [Hash] A hash containing each available fund and their respective quota values on the specified dates.
-# todo: change to DD-MM-YYYY
 def get_funds_quota_prices(start_date, end_date)
     funds_ids = readJson("constants.json")["funds_ids"]
     portafolio_quota_prices = {}
+    formated_start_date = convert_date_format(start_date)
+    formated_end_date = convert_date_format(end_date)
     funds_ids.each do |fund, id|
         portafolio_quota_prices[fund] = get_fund_quota_prices(
-            id, start_date, end_date
+            id, formated_start_date, formated_end_date
         )
     end
     return portafolio_quota_prices
