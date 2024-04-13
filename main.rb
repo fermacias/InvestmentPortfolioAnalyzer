@@ -18,7 +18,7 @@ def portfolio_returns_calculator(
         quotas = investment_amount*percentage/initial_quota_price
         final_returns += (final_quota_price * quotas)
     end
-  return final_returns
+  return final_returns - investment_amount
 end
 
 # Analyzes the available portfolios and determines which one provides the highest return within a specific time period.
