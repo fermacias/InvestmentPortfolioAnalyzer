@@ -6,39 +6,22 @@ Before running this program, ensure that you have Ruby installed on your system.
 
 ## Installation
 1. Clone this repository to your local machine.
-2. Install Ruby if you haven't already.
-3. Install the RSpec gem in order to run the tests.
+2. Install Ruby, you can visit the [ruby documentation](https://www.ruby-lang.org/en/documentation/installation/) to define the command depending on your operative system.
+3. Install the gems running the following code
+```
+bundle install
+```
 
 ## Usage
-Ensure you have a portfolios.json file in the root directory with the required portfolio data. The portfolio must have the following format.
-```
-[
-  {
-    "risky_norris": 0.6,
-    "moderate_pitt": 0.2,
-    "conservative_clooney": 0.1,
-    "very_conservative_streep": 0.1
-  },
-  {
-    "risky_norris": 0.1,
-    "moderate_pitt": 0.2,
-    "conservative_clooney": 0.3,
-    "very_conservative_streep": 0.4
-  },
-  ...
-]
-```
-
 You can run the program using the following commands
 ```
-cd app
-ruby main.rb
+bundle exec ruby app/main.rb
 ```
 
-Then, you have to enter the investment start date, end date, and amount. The dates must have the DD/MM/YYYY format and the amount must be a valid integer.
+Then, you have to enter the investment start date, end date and amount. The dates must have the DD/MM/YYYY format and the amount must be a valid integer.
 
 ## Testing
 This project includes tests using RSpec. You can run the tests with the following command:
 ```
-rspec
+bundle exec rspec
 ```
