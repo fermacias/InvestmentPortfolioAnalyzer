@@ -34,7 +34,7 @@ end
 def get_fund_quota_prices(id, start_date, end_date)
     url = generate_real_assets_api_url(id, start_date, end_date)
     uri = URI(url)
-    res = Net::HTTP.get_response(uri) # como mockeo esto?
+    res = Net::HTTP.get_response(uri)
     if res.is_a?(Net::HTTPSuccess)
       result = JSON.parse(res.body)
       initial_price = get_price_from_real_assets(result, 0)

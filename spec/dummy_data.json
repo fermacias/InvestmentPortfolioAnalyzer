@@ -1,0 +1,14 @@
+[
+    {
+        "risky_norris":10,
+        "moderate_pitt":20,
+        "conservative_clooney":30,
+        "very_conservative_streep":40
+    },
+    {
+        "risky_norris":50,
+        "moderate_pitt":60,
+        "conservative_clooney":70,
+        "very_conservative_streep":80
+    }
+]
