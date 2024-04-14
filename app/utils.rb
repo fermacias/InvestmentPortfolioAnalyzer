@@ -8,8 +8,9 @@ require 'date'
 # @param [String] file_name The name of the JSON file to read.
 # @return [Object] A Ruby object representing the parsed JSON data, which can be a hash or a list.
 def read_json(file_name)
-    json_data = File.read(file_name)
-    return JSON.parse(json_data)
+  file_path = File.expand_path(file_name, __dir__)
+  data = File.read(file_path)
+  return JSON.parse(data)
 end
 
 # Checks if a string is a valid date in DD-MM-YYYY format.

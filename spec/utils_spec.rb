@@ -4,7 +4,7 @@ require 'stringio'
 require './app/utils.rb' 
 
 describe 'read_json' do
-  let(:test_json_file) { 'spec/dummy_data.json' }
+  let(:test_json_file) { '../spec/dummy_data.json' }
   it 'reads a valid JSON file' do
     json_data = read_json(test_json_file)
     expect(json_data).to be_a(Array)
