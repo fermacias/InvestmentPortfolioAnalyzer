@@ -1,5 +1,5 @@
-require "./utils.rb"
-require "./process_user_request.rb"
+require_relative "utils.rb"
+require_relative "process_user_request.rb"
 require 'date'
 
 # Gets input from the user for investment parameters.

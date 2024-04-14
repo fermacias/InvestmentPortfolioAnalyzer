@@ -1,5 +1,5 @@
-require "./utils.rb"
-require "./controlers/client.rb"
+require_relative "utils.rb"
+require_relative "controlers/client.rb"
 
 # Gets the initial quota price from a hash containing fund information.
 #
